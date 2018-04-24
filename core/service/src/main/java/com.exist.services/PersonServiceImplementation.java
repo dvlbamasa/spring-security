@@ -1,50 +1,47 @@
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PersonServiceImplementation implements PersonService{
 
+	@Autowired
 	private Dao dao;
 
-	public void setDao(Dao dao) {
-		this.dao = dao;
-	}
-
-	@Override
+	@Transactional
 	public void addPerson(Person person) {
 		dao.create(person);
 	}
 
-	@Override
+	@Transactional
 	public void updatePerson(Person person) {
 		dao.update(person);
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Person> listPersons() {
 		return dao.getList("Person");
 	}
 
-	@Override
+	@Transactional
 	public Person getPersonById(long id) {
 		return (Person) dao.getById(id, "Person");
 	}
 
-	@Override
+	@Transactional
 	public void deletePerson(long id) {
 		dao.delete(id, "Person");
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Person> listPersonsOrderBy(String orderType) {
 		return dao.getOrderedList("Person", orderType);
 	}
 
-	@Override
+	@Transactional
 	public void deleteContact(long id) {
 		dao.delete(id, "ContactInformation");
 	}
 
-	@Override
-	public void addAddress(Address address) {
-		dao.create(address);
-	}
 }

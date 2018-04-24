@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController{
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView showIndex(ModelAndView modelAndView){
 		modelAndView.setViewName("index");
 		return modelAndView;

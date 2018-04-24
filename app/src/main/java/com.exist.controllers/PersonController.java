@@ -10,21 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 @RequestMapping(value="/person")
 public class PersonController {
 	
+	@Autowired
 	private PersonService personService;
+	
+	@Autowired
 	private RoleService roleService;
-
-	public void setPersonService(PersonService personService) {
-		this.personService = personService;
-	}
-
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listPersons(ModelAndView modelAndView,

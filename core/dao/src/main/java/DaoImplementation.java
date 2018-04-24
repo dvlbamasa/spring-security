@@ -1,6 +1,5 @@
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
-import org.hibernate.Transaction;
 import org.hibernate.Criteria;
 import static org.hibernate.Criteria.DISTINCT_ROOT_ENTITY;
 import org.hibernate.criterion.Order;
@@ -9,46 +8,40 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.Query;
 import java.util.List;
-import java.io.Serializable;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
-@Transactional
 public class DaoImplementation implements Dao{
 
+    @Autowired
     private SessionFactory sessionFactory;
 
-    public DaoImplementation(SessionFactory sessionFactory) {
-      this.sessionFactory = sessionFactory;
-    }
-	
+    @Override
     public <T> void create(T object) {
-    	Session session = sessionFactory.getCurrentSession();
-      session.save(object);
+    	sessionFactory.getCurrentSession().save(object);
     }
 
+    @Override
   	public Object getById(long id, String object) {
-  		Session session = sessionFactory.getCurrentSession();
-  		Object resultObject = session.get(object, id);
-      return resultObject; 
+        return sessionFactory.getCurrentSession().get(object, id); 
     }
   	
+    @Override
   	public <T> void update(T object) {
-  		Session session = sessionFactory.getCurrentSession();
-	  	session.update(object);
+  		sessionFactory.getCurrentSession().update(object);
   	}
 
+    @Override
   	public <T> void delete(long id, String object) {
   		Session session = sessionFactory.getCurrentSession();
-      Object resultObject = session.get(object, id);
-      if (resultObject != null) {
-          session.delete(resultObject);
-      }
+        Object resultObject = session.get(object, id);
+        if (resultObject != null) {
+            session.delete(resultObject);
+        }
   	}
 
+    @Override
   	public List getList(String object) {
   		Session session = sessionFactory.getCurrentSession();
   		List results = null;
@@ -58,10 +51,11 @@ public class DaoImplementation implements Dao{
 			results = criteria.list();
     	} catch (HibernateException e) {
     		e.printStackTrace(); 
-      }
+        }
 		  return results;
   	}
 
+    @Override
   	public List getOrderedList(String object, String order) {
   		Session session = sessionFactory.openSession();
   		List results = null;

@@ -9,5 +9,4 @@ public interface PersonService {
 	public void deletePerson(long id);
 	public List<Person> listPersonsOrderBy(String orderType);
 	public void deleteContact(long id);
-	public void addAddress(Address address);
 }

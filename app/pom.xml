@@ -12,7 +12,7 @@
   <name>app</name>
   <url>http://maven.apache.org</url>
   <build>
-    <finalName>springApp</finalName>
+    <finalName>springApp2</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -24,6 +24,10 @@
             <path>/springApp2</path>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
     </plugins>
     <resources>
       <resource>
@@ -32,12 +36,27 @@
         <includes>
           <include>messages.properties</include>
           <include>hibernate.cfg.xml</include>
-          <include>application.properties</include>
+          <include>log4j.properties</include>
         </includes>
       </resource>
     </resources>
   </build>
   <dependencies>
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.16</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.1</version>
+    </dependency>
     <dependency>
       <groupId>com.exist</groupId>
       <artifactId>service</artifactId>

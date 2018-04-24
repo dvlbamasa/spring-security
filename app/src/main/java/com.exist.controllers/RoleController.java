@@ -6,16 +6,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 @RequestMapping(value="/role")
 public class RoleController {
 	
+	@Autowired
 	private RoleService roleService;
-
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
 
 	@RequestMapping(value="/list")
 	public ModelAndView listRoles(ModelAndView modelAndView,

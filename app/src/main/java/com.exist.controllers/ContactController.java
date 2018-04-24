@@ -6,18 +6,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 @RequestMapping(value="/contact")
 public class ContactController {
 	
+	@Autowired
 	private PersonService personService;
-
 	
-	public void setPersonService(PersonService personService) {
-		this.personService = personService;
-	}
-
 	@RequestMapping(value="/list")
 	public ModelAndView listPersonsContact(ModelAndView modelAndView,
 									@RequestParam(value="prompt", required=false) String prompt) {
