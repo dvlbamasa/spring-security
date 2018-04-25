@@ -27,11 +27,11 @@
 		<property name="format_sql">${db.format_sql}</property>
 	      
 		<!-- List of XML mapping files -->
-		<mapping class = "Person"/>
-		<mapping class = "Address"/>
-		<mapping class = "Name"/>
-		<mapping class = "Role"/>
-		<mapping class = "ContactInformation"/>
+		<mapping class = "com.exist.model.Person"/>
+		<mapping class = "com.exist.model.Address"/>
+		<mapping class = "com.exist.model.Name"/>
+		<mapping class = "com.exist.model.Role"/>
+		<mapping class = "com.exist.model.ContactInformation"/>
       
    	</session-factory>
 </hibernate-configuration>

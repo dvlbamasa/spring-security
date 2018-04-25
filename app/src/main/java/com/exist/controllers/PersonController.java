@@ -1,3 +1,13 @@
+package com.exist.controllers;
+
+import com.exist.model.Role;
+import com.exist.model.Person;
+import com.exist.model.ContactInformation;
+import com.exist.services.PersonService;
+import com.exist.services.RoleService;
+import com.exist.validations.FormValidation;
+import com.exist.util.Util;
+
 import java.util.List;
 import java.util.HashSet;
 import java.util.Collections;
@@ -11,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 @Controller
 @RequestMapping(value="/person")
@@ -48,7 +59,7 @@ public class PersonController {
 			persons = personService.listPersons();	
 			subTitle = "List of Persons";
 		}
-		if (persons.isEmpty()) {
+		if (persons == null || persons.isEmpty()) {
 			modelAndView.setViewName("noPersons");
 		}
 		else {

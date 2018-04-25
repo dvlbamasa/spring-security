@@ -1,3 +1,10 @@
+package com.exist.controllers;
+
+import com.exist.model.ContactInformation;
+import com.exist.model.Person;
+import com.exist.services.PersonService;
+import com.exist.validations.ContactFormValidation;
+
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +26,7 @@ public class ContactController {
 	public ModelAndView listPersonsContact(ModelAndView modelAndView,
 									@RequestParam(value="prompt", required=false) String prompt) {
 		List<Person> persons = personService.listPersons();
-		if (persons.isEmpty()) {
+		if (persons == null || persons.isEmpty()) {
 			modelAndView.setViewName("noPersons");
 		}
 		else {

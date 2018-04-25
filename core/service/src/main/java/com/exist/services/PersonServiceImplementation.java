@@ -1,9 +1,15 @@
+package com.exist.services;
+
+import com.exist.model.Person;
+import com.exist.dao.Dao;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("personService")
 public class PersonServiceImplementation implements PersonService{
 
 	@Autowired
@@ -19,7 +25,7 @@ public class PersonServiceImplementation implements PersonService{
 		dao.update(person);
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Person> listPersons() {
 		return dao.getList("Person");
 	}

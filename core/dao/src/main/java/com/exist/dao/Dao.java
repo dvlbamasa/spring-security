@@ -1,3 +1,5 @@
+package com.exist.dao;
+
 import java.util.List;
 
 public interface Dao {

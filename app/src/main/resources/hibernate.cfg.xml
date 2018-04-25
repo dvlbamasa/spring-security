@@ -28,11 +28,11 @@
 
 		<property name="hibernate.enable_lazy_load_no_trans">true</property>
 	      
-		<mapping class = "Person"/>
-		<mapping class = "Address"/>
-		<mapping class = "Name"/>
-		<mapping class = "Role"/>
-		<mapping class = "ContactInformation"/>
+		<mapping class = "com.exist.model.Person"/>
+		<mapping class = "com.exist.model.Address"/>
+		<mapping class = "com.exist.model.Name"/>
+		<mapping class = "com.exist.model.Role"/>
+		<mapping class = "com.exist.model.ContactInformation"/>
       
    	</session-factory>
 </hibernate-configuration>

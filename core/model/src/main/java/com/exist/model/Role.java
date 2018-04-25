@@ -1,3 +1,5 @@
+package com.exist.model;
+
 import java.util.Set;
 import javax.persistence.*;
 

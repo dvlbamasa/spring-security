@@ -119,6 +119,6 @@
 		   		<button type="submit">Add Person</button>
 		   	</form><br/><br/>
 		</c:if>
-	   <a href="/springApp/">Back to Homepage</a>
+	   <a href="/springApp2/">Back to Homepage</a>
    </body>
 </html>

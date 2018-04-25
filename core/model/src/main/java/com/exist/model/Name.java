@@ -1,3 +1,5 @@
+package com.exist.model;
+
 import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 

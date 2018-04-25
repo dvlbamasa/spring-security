@@ -1,4 +1,7 @@
+package com.exist.services;
+
 import java.util.List;
+import com.exist.model.Person;
 
 public interface PersonService {
 	

@@ -1,3 +1,5 @@
+package com.exist.model;
+
 import javax.persistence.MappedSuperclass;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;

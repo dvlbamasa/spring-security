@@ -1,3 +1,5 @@
+package com.exist.dao;
+
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
 import org.hibernate.Criteria;
@@ -10,8 +12,10 @@ import org.hibernate.Query;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+@Repository("dao")
+@Transactional
 public class DaoImplementation implements Dao{
 
     @Autowired
@@ -48,7 +52,7 @@ public class DaoImplementation implements Dao{
   		try {
   			Criteria criteria = session.createCriteria(object);
   			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			results = criteria.list();
+        results = criteria.list();
     	} catch (HibernateException e) {
     		e.printStackTrace(); 
         }

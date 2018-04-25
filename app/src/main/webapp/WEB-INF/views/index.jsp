@@ -5,7 +5,8 @@
     </head>
     <body>
       <div align="center">
-        <h2>Welcome to the Simple CRUD Application using Spring MVC!</h2>
+        <h2>Welcome to the Simple CRUD Application</h2>
+        <h2>using Spring MVC and Spring Security!</h2>
         Choose the Entity you want to modify:<br/>
           <a href="person/list">1. Person</a><br/>
           <a href="role/list">2. Role</a><br/>

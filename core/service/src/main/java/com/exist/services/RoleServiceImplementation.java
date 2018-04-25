@@ -1,9 +1,14 @@
+package com.exist.services;
+
+import com.exist.model.Role;
+import com.exist.dao.Dao;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("roleService")
 public class RoleServiceImplementation implements RoleService {
 
 	@Autowired

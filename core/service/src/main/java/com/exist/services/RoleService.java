@@ -1,3 +1,7 @@
+package com.exist.services;
+
+import com.exist.model.Role;
+
 import java.util.List;
 
 public interface RoleService {
