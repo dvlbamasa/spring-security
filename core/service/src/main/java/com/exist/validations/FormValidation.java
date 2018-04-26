@@ -17,6 +17,10 @@ public class FormValidation implements Validator {
 	public void validate(Object object, Errors errors) {
 		Person person = (Person) object;  
 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "required.userName");
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password");  
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name.firstName", "required.firstName"); 
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name.middleName", "required.MiddleName"); 

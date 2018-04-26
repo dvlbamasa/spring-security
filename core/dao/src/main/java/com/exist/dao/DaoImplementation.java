@@ -1,5 +1,9 @@
 package com.exist.dao;
 
+import com.exist.model.Role;
+import com.exist.model.Person;
+import com.exist.model.ContactInformation;
+
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
 import org.hibernate.Criteria;
@@ -30,6 +34,11 @@ public class DaoImplementation implements Dao{
   	public Object getById(long id, String object) {
         return sessionFactory.getCurrentSession().get(object, id); 
     }
+
+    @Override
+    public Object getByUserName(String userName, String object) {
+      return sessionFactory.getCurrentSession().get(object, userName);
+    }
   	
     @Override
   	public <T> void update(T object) {
@@ -52,11 +61,11 @@ public class DaoImplementation implements Dao{
   		try {
   			Criteria criteria = session.createCriteria(object);
   			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        results = criteria.list();
+            results = criteria.list();
     	} catch (HibernateException e) {
     		e.printStackTrace(); 
         }
-		  return results;
+		return results;
   	}
 
     @Override
@@ -67,7 +76,7 @@ public class DaoImplementation implements Dao{
   			Criteria criteria = session.createCriteria(object);
   			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
   			criteria.addOrder(Order.asc(order));
-        results = criteria.list();
+            results = criteria.list();
   		} catch (HibernateException e) {
   			e.printStackTrace(); 
   		}

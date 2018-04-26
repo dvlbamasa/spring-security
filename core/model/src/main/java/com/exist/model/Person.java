@@ -13,6 +13,8 @@ import org.springframework.format.annotation.NumberFormat;
 public class Person extends EntityParent{
 	
 	private long id;
+	private String username;
+	private String password;
 	private Name name;
 	private Gender gender;
 	private Address address;
@@ -25,15 +27,35 @@ public class Person extends EntityParent{
 
 	public Person() {}
 
-	public Person(Name name, Gender gender, Address address, Date birthday, float gwa, 
+	public Person(Name name, String username, String password, Gender gender, Address address, Date birthday, float gwa, 
 					Date dateHired, boolean currentlyEmployed) {
 		this.name = name;
+		this.username = username;
+		this.password = password;
 		this.gender = gender;
 		this.address = address;
 		this.birthday = birthday;
 		this.gwa = gwa;
 		this.dateHired = dateHired;
 		this.currentlyEmployed = currentlyEmployed;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Column(name = "username", nullable = false)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Column(name = "password", nullable = false)
+	public String getPassword() {
+		return password;
 	}
 
 	public void setName(Name name) {

@@ -26,6 +26,16 @@
 	      	<form:form action="${action}" method="post" modelAttribute="person">
 	      		<table>
 	      			<form:hidden path="id"/>
+	      			<tr><td colspan="2"><form:errors path="userName" cssClass="error" /></td></tr>
+	      			<tr>
+	      				<td>Username: </td>
+	      				<td><form:input path="userName" maxlength="20" required="required" /></td>
+	      			</tr>
+	      			<tr><td colspan="2"><form:errors path="password" cssClass="error" /></td></tr>
+	      			<tr>
+	      				<td>Password: </td>
+	      				<td><form:input type="password" path="password" maxlength="20" required="required" /></td>
+	      			</tr>
 	      			<tr><td colspan="2"><form:errors path="name.firstName" cssClass="error" /></td></tr>
 	      			<tr>
 	      				<td>First Name: </td>

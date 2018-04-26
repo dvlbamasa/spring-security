@@ -8,6 +8,8 @@ public interface Dao {
 
   	public Object getById(long id, String object);
 
+  	public Object getByUserName(String userName, String object);
+
   	public <T> void update(T object);
 
   	public <T> void delete(long id, String object);

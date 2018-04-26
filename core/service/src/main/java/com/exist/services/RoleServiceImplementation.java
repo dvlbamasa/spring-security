@@ -26,11 +26,11 @@ public class RoleServiceImplementation implements RoleService {
 
 	@Transactional
 	public Role getRoleById(long id) {
-		return (Role) dao.getById(id, "Role");
+		return (Role) dao.getById(id, "com.exist.model.Role");
 	}
 
 	@Transactional(readOnly = true)
 	public List<Role> listRoles() {
-		return (List<Role>) dao.getList("Role");
+		return (List<Role>) dao.getList("com.exist.model.Role");
 	}
 }

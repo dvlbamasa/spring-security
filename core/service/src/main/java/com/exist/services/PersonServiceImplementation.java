@@ -27,12 +27,17 @@ public class PersonServiceImplementation implements PersonService{
 
 	@Transactional
 	public List<Person> listPersons() {
-		return dao.getList("Person");
+		return dao.getList("com.exist.model.Person");
 	}
 
 	@Transactional
 	public Person getPersonById(long id) {
-		return (Person) dao.getById(id, "Person");
+		return (Person) dao.getById(id, "com.exist.model.Person");
+	}
+
+	@Transactional
+	public Person getPersonByUserName(String userName) {
+		return (Person) dao.getByUserName(userName, "com.exist.model.Person");
 	}
 
 	@Transactional
@@ -42,12 +47,12 @@ public class PersonServiceImplementation implements PersonService{
 
 	@Transactional(readOnly = true)
 	public List<Person> listPersonsOrderBy(String orderType) {
-		return dao.getOrderedList("Person", orderType);
+		return dao.getOrderedList("com.exist.model.Person", orderType);
 	}
 
 	@Transactional
 	public void deleteContact(long id) {
-		dao.delete(id, "ContactInformation");
+		dao.delete(id, "com.exist.model.ContactInformation");
 	}
 
 }
