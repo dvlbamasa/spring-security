@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 
 @Controller
 @RequestMapping(value="/person")
@@ -42,10 +41,10 @@ public class PersonController {
 		String subTitle = "";
 		if (orderType != null) {
 			if (orderType.equals("GWA")) {
-			persons = personService.listPersons();
-            Collections.sort(persons, (person1, person2) -> {
-               return Float.compare(person1.getGwa(), person2.getGwa());
-            });
+				persons = personService.listPersons();
+	            Collections.sort(persons, (person1, person2) -> {
+	               return Float.compare(person1.getGwa(), person2.getGwa());
+	            });
 			}
 			else if (orderType.equals("Date Hired")) {
 				persons = personService.listPersonsOrderBy("dateHired");
@@ -87,11 +86,14 @@ public class PersonController {
 	public ModelAndView savePerson(@ModelAttribute("person") Person person, BindingResult result) {
 		FormValidation formValidation = new FormValidation();
 		formValidation.validate(person, result);
-		if (result.hasErrors()) {
+		if (result.hasErrors() || checkUsernameExists(person)) {
 			ModelAndView modelAndView = new ModelAndView("personForm");
 			List<Role> roles = roleService.listRoles();
 			person.setBirthday(Util.parseDate(person.getBirthday()));
 			person.setDateHired(Util.parseDate(person.getDateHired()));
+			if (checkUsernameExists(person)) {
+				modelAndView.addObject("usernameExists", "Username already exists! Try entering a new one.");
+			}
 			modelAndView.addObject("person", person);
 			modelAndView.addObject("roles", roles);
 			modelAndView.setViewName("personForm");
@@ -135,6 +137,7 @@ public class PersonController {
 		}
 		ModelAndView modelAndView = new ModelAndView("personForm");
 		List<Role> roles = roleService.listRoles();
+		person.setPassword("");
 		modelAndView.addObject("person", person);
 		modelAndView.addObject("roles", roles);
 		modelAndView.addObject("title", "Update Person");
@@ -154,5 +157,13 @@ public class PersonController {
 		}
 		person.getRoles().clear();
 		person.setRoles(newRoles);	
+	}
+
+	public boolean checkUsernameExists(Person person) {
+		Person newPerson = personService.getPersonByUserName(person.getUsername());
+		if(newPerson != null && newPerson.getId() != person.getId()) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -1,6 +1,7 @@
 package com.exist.validations;
 
 import com.exist.model.Person;
+import com.exist.services.PersonService;
 
 import org.springframework.validation.Errors;  
 import org.springframework.validation.ValidationUtils; 
@@ -17,7 +18,7 @@ public class FormValidation implements Validator {
 	public void validate(Object object, Errors errors) {
 		Person person = (Person) object;  
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "required.userName");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "required.userName");
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password");  
 

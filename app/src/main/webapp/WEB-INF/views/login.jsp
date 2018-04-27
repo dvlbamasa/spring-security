@@ -8,22 +8,39 @@
     <head>
     	<title>Spring Security App</title>
     	 <br/><br/>
+       <style>
+            .error {
+                color: #ff0000;
+                font-weight: bold;
+            }
+            .success {
+                color: green;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
       <div align="center">
         <h2>Spring Security App</h2>
+        <c:if test="${param.error != null}">
+          <p class="error">Invalid username or password.</p>
+        </c:if>
+        <c:if test="${param.logout != null}">
+          <p class="success">You have been logged out successfully.</p>
+        </c:if>
         <h4>Login Form</h4>
-        <form action='<spring:url value="/login"/>' method="post">
+        <form action='<spring:url value="/login"/>' method="POST">
           <table>
             <tr>
-              <td>Username</td>
+              <td>Username:</td>
               <td><input type="text" name="username"></td>
             </tr>
             <tr>
-              <td>Password</td>
+              <td>Password:</td>
               <td><input type="password" name="password"></td>
             </tr>
           </table>
+          <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
           <button type="submit">Login</button>
         </form>
       </div>

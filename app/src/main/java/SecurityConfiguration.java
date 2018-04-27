@@ -31,15 +31,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/list")
+        http.authorizeRequests().antMatchers("/")
                 .access("hasRole('USER') or hasRole('ADMIN')")
-                .and().formLogin()
+                .antMatchers("/person/list", "/contact/list", "/role/list")
+                .access("hasRole('USER') or hasRole('ADMIN')")
+                .antMatchers("/person/add*", "/person/delete*", "/person/update*")
+                .access("hasRole('ADMIN')")
+                .antMatchers("/contact/add*", "/contact/delete*", "/contact/update*")
+                .access("hasRole('ADMIN')")
+                .antMatchers("/role/add*", "/role/update*")
+                .access("hasRole('ADMIN')")
+                .and().formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
-                .defaultSuccessUrl("/servletApp2/home")
+                .defaultSuccessUrl("/")
                 .and().logout() 
-                .logoutUrl("/logout") 
+                .logoutUrl("logout") 
                 .logoutSuccessUrl("/login")
-                .and().csrf().and().exceptionHandling().accessDeniedPage("/login");
+                .and().csrf().and().exceptionHandling().accessDeniedPage("/accessDenied");
     }
  
     @Bean

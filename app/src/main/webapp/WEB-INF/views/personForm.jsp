@@ -26,10 +26,13 @@
 	      	<form:form action="${action}" method="post" modelAttribute="person">
 	      		<table>
 	      			<form:hidden path="id"/>
-	      			<tr><td colspan="2"><form:errors path="userName" cssClass="error" /></td></tr>
+	      			<c:if test="${usernameExists ne null}">
+	      				<tr><td colspan="2"><span class="error">${usernameExists}</td></tr>
+	      			</c:if>
+	      			<tr><td colspan="2"><form:errors path="username" cssClass="error" /></td></tr>
 	      			<tr>
 	      				<td>Username: </td>
-	      				<td><form:input path="userName" maxlength="20" required="required" /></td>
+	      				<td><form:input path="username" maxlength="20" required="required" /></td>
 	      			</tr>
 	      			<tr><td colspan="2"><form:errors path="password" cssClass="error" /></td></tr>
 	      			<tr>

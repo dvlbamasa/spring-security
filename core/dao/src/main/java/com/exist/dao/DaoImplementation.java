@@ -37,7 +37,9 @@ public class DaoImplementation implements Dao{
 
     @Override
     public Object getByUserName(String userName, String object) {
-      return sessionFactory.getCurrentSession().get(object, userName);
+      Criteria criteria = sessionFactory.getCurrentSession().createCriteria(object);
+      criteria.add(Restrictions.eq("username", userName));
+      return criteria.uniqueResult();
     }
   	
     @Override

@@ -5,6 +5,7 @@
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+   <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
    <head>
       <title><c:out value="${title}"></c:out></title> 
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -30,24 +31,27 @@
      	</c:if>
         <table id="t01">
              <tr>
-                <th>Operation</th>
+             	<sec:authorize access="hasRole('ADMIN')">
+                	<th>Operation</th>
+                </sec:authorize>
                 <th>Id</th>
-                <th>First Name</th>                         
-                <th>Middle Name</th>
-                <th>Last Name</th>
+                <th>Username</th> 
+                <th>First_Name</th>                         
+                <th>Middle_Name</th>
+                <th>Last_Name</th>
                 <c:if test="${orderType ne 'contacts'}"> 
                 	<th>Gender</th>
                 	<th>Birthday</th>
                 	<th>GWA</th>
-                	<th>Currently Employed</th>
-                	<th>Date Hired</th>
-                	<th>Street Number</th>
+                	<th>Currently_Employed</th>
+                	<th>Date_Hired</th>
+                	<th>Street_Number</th>
                 	<th>Barangay</th>
                 	<th>Municipal</th>
-                	<th>Zip Code</th>
+                	<th>Zip_Code</th>
                 </c:if>	
                 <th>Landline</th>
-                <th>Mobile Number</th>
+                <th>Mobile_Number</th>
                 <th>Email</th>
                 <c:if test="${orderType ne 'contacts'}"> 
                 	<th>Roles</th>
@@ -55,26 +59,29 @@
 			</tr>
 			<c:forEach items="${requestScope.persons}" var="person">
 				<tr>
-					<c:if test="${orderType eq 'contacts'}"> 
-						<c:if test="${person.contactInformation eq null}"> 
-						    <td>
-						       <a href="add?personId=${person.id}" >Add_Contact</a><br/> 
-						    </td>
+					<sec:authorize access="hasRole('ADMIN')">
+						<c:if test="${orderType eq 'contacts'}"> 
+							<c:if test="${person.contactInformation eq null}"> 
+							    <td>
+							       <a href="add?personId=${person.id}" >Add_Contact</a><br/> 
+							    </td>
+							</c:if>
+							<c:if test="${person.contactInformation ne null}"> 
+							    <td>
+							       <a href="update?personId=${person.id}" >Update_Contact</a><br/>
+							       <a href="delete?personId=${person.id}" >Delete_Contact</a><br/> 
+							    </td>
+							</c:if>
 						</c:if>
-						<c:if test="${person.contactInformation ne null}"> 
-						    <td>
-						       <a href="update?personId=${person.id}" >Update_Contact</a><br/>
-						       <a href="delete?personId=${person.id}" >Delete_Contact</a><br/> 
-						    </td>
+						<c:if test="${orderType ne 'contacts'}"> 
+							<td>
+								<a href="update?personId=${person.id}">Update</a><br/> 
+							    <a href="delete?personId=${person.id}">Delete</a> 
+							</td>
 						</c:if>
-					</c:if>
-					<c:if test="${orderType ne 'contacts'}"> 
-						<td>
-							<a href="update?personId=${person.id}">Update</a><br/> 
-						    <a href="delete?personId=${person.id}">Delete</a> 
-						</td>
-					</c:if>
+					</sec:authorize>
 					<td><c:out value='${person.id}'/> </td>
+					<td><c:out value='${person.username}'/> </td>
 					<td><c:out value="${person.name.firstName}"/></td>
 					<td><c:out value="${person.name.middleName}"/></td>
 					<td><c:out value="${person.name.lastName}"/></td>
@@ -114,11 +121,13 @@
 	           	</tr>
 	        </c:forEach>
 	  	</table><br/><br/>
-	  	<c:if test="${orderType ne 'contacts'}"> 
-		   	<form action="add">
-		   		<button type="submit">Add Person</button>
-		   	</form><br/><br/>
-		</c:if>
+	  	<sec:authorize access="hasRole('ADMIN')">
+		  	<c:if test="${orderType ne 'contacts'}"> 
+			   	<form action="add">
+			   		<button type="submit">Add Person</button>
+			   	</form><br/><br/>
+			</c:if>
+		</sec:authorize>
 	   <a href="/springApp2/">Back to Homepage</a>
    </body>
 </html>

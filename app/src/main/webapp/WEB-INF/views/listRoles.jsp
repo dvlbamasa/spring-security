@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
    <head>
       <title><c:out value="${title}"></c:out></title> 
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -15,16 +16,20 @@
       </c:if>
       <table id="t01">
          <tr>
-            <th>Operation</th>
+            <sec:authorize access="hasRole('ADMIN')">
+               <th>Operation</th>
+            </sec:authorize>
             <th>Id</th>
             <th>Role Name</th> 
             <th>Persons</th>  
          </tr>
          <c:forEach items="${requestScope.roles}" var="role">
             <tr>
-               <td> 
-                  <a href="update?roleId=${role.id}">Update</a><br/>
-               </td>
+               <sec:authorize access="hasRole('ADMIN')">
+                  <td> 
+                     <a href="update?roleId=${role.id}">Update</a><br/>
+                  </td>
+               </sec:authorize>
                <td><c:out value="${role.id}"></c:out></td>
                <td><c:out value="${role.name}"></c:out></td>
                <td>
@@ -36,9 +41,11 @@
          </c:forEach>
       </table>
       <br/>
-      <form action="add">
-         <button type="submit">Add Role</button>
-      </form><br/><br/>
+      <sec:authorize access="hasRole('ADMIN')">
+         <form action="add">
+            <button type="submit">Add Role</button>
+         </form><br/><br/>
+      </sec:authorize>
       <a href="/springApp2/">Back to Homepage</a>
    </body>
 </html>

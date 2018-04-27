@@ -7,13 +7,20 @@
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
     <head>
     	<title>Spring Security App</title>
-    	 <br/><br/>
     </head>
     <body>
+      <div>
+        <div style="float:left;">
+          <h3>Welcome, <strong>${loggedInUser}</strong>!</h3>
+        </div>
+        <div style="float:right;">
+          <a href="logout">Logout</a>
+        </div>  
+      </div>
+      <br/><br/><br/>
       <div align="center">
-        <h2>Welcome to the Simple CRUD Application</h2>
-        <h2>using Spring MVC with Spring Security!</h2>
-        <h1><c:out value="${password}"></c:out></h1>
+        <h2>CRUD Application</h2>
+         <h3>Using Hibernate and Spring MVC with Spring Security</h3>
         Choose the Entity you want to modify:<br/>
           <a href="person/list">1. Person</a><br/>
           <a href="role/list">2. Role</a><br/>
