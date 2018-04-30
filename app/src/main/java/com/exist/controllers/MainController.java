@@ -30,7 +30,7 @@ public class MainController{
 	@RequestMapping(value="/logout", method={ RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView logout(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){    
+        if (auth != null) {    
             new SecurityContextLogoutHandler().logout(request, response, auth);
             SecurityContextHolder.getContext().setAuthentication(null);
         }
@@ -47,10 +47,10 @@ public class MainController{
 	private String getPrincipal(){
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
- 
         if (principal instanceof UserDetails) {
             userName = ((UserDetails)principal).getUsername();
-        } else {
+        }
+        else {
             userName = principal.toString();
         }
         return userName;

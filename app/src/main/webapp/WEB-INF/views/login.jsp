@@ -33,11 +33,11 @@
           <table>
             <tr>
               <td>Username:</td>
-              <td><input type="text" name="username"></td>
+              <td><input type="text" name="username" required="required"></td>
             </tr>
             <tr>
               <td>Password:</td>
-              <td><input type="password" name="password"></td>
+              <td><input type="password" name="password" required="required"></td>
             </tr>
           </table>
           <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>

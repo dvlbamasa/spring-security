@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 @RequestMapping(value="/person")
@@ -31,6 +32,9 @@ public class PersonController {
 	
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listPersons(ModelAndView modelAndView,
@@ -109,6 +113,7 @@ public class PersonController {
 		else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/person/list");
 			addRoles(person, roleService.listRoles());
+			person.setPassword(passwordEncoder.encode(person.getPassword()));
 			if (person.getId() == 0) {
 				personService.addPerson(person);
 				modelAndView.addObject("prompt", "Successfully added a Person!");

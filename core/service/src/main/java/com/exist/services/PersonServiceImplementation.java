@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service("personService")
@@ -16,18 +15,13 @@ public class PersonServiceImplementation implements PersonService{
 	@Autowired
 	private Dao dao;
 
-	@Autowired
-    private PasswordEncoder passwordEncoder;
-
 	@Transactional
 	public void addPerson(Person person) {
-		person.setPassword(passwordEncoder.encode(person.getPassword()));
 		dao.create(person);
 	}
 
 	@Transactional
 	public void updatePerson(Person person) {
-		person.setPassword(passwordEncoder.encode(person.getPassword()));
 		dao.update(person);
 	}
 
