@@ -25,17 +25,17 @@ public class PersonServiceImplementation implements PersonService{
 		dao.update(person);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Person> listPersons() {
 		return dao.getList("com.exist.model.Person");
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Person getPersonById(long id) {
 		return (Person) dao.getById(id, "com.exist.model.Person");
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Person getPersonByUserName(String userName) {
 		return (Person) dao.getByUserName(userName, "com.exist.model.Person");
 	}

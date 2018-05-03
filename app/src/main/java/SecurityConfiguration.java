@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/")
-                .and().exceptionHandling().accessDeniedPage("/accessDenied");
+                .and().csrf().disable().exceptionHandling().accessDeniedPage("/accessDenied");
     }
  
     @Bean

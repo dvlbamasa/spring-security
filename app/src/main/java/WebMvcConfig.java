@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.exist.controllers", "com.exist.services"})
+@ComponentScan(basePackages = {"com.exist.controllers", "com.exist.services", "com.exist.restcontrollers"})
 public class WebMvcConfig implements WebMvcConfigurer {
  
    @Override

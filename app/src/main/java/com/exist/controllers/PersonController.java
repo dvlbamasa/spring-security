@@ -103,12 +103,11 @@ public class PersonController {
 			modelAndView.setViewName("personForm");
 			if (person.getId() == 0) {
 				modelAndView.addObject("title", "Add Person");
-				return modelAndView;
 			}
 			else {
 				modelAndView.addObject("title", "Update Person");
-				return modelAndView;
 			}
+			return modelAndView;
 		}
 		else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/person/list");
