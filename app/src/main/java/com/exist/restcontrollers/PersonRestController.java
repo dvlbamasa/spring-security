@@ -30,7 +30,7 @@ public class PersonRestController {
 	@Autowired
     private PasswordEncoder passwordEncoder;
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ResponseEntity<List<Person>> listPersons() {
 		List<Person> persons = personService.listPersons();
 		if (persons == null || persons.isEmpty()) {
@@ -48,7 +48,7 @@ public class PersonRestController {
 		return new ResponseEntity<Person>(person, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<Void> addPerson(@RequestBody Person person, UriComponentsBuilder ucBuilder) {
 		personService.addPerson(person);
 
@@ -57,7 +57,7 @@ public class PersonRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Person> updatePerson(@PathVariable("id") long id, @RequestBody Person person) {
 		Person newPerson = personService.getPersonById(id);
 		if (newPerson == null) {
@@ -78,7 +78,7 @@ public class PersonRestController {
 		return new ResponseEntity<Person>(person, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Person> deletePerson(@PathVariable("id") long id) {
 		Person person = personService.getPersonById(id);
 		if (person == null) {

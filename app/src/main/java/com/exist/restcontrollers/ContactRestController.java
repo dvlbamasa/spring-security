@@ -49,7 +49,7 @@ public class ContactRestController {
 		return new ResponseEntity<ContactInformation>(person.getContactInformation(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<ContactInformation> updatePerson(@PathVariable("id") long id, @RequestBody ContactInformation contactInformation) {
 		Person newPerson = personService.getPersonById(id);
 		if (newPerson == null || newPerson.getContactInformation() != null) {
@@ -60,7 +60,7 @@ public class ContactRestController {
 		return new ResponseEntity<ContactInformation>(newPerson.getContactInformation(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<ContactInformation> deleteContact(@PathVariable("id") long id) {
 		Person person = personService.getPersonById(id);
 		if (person == null || person.getContactInformation() == null) {

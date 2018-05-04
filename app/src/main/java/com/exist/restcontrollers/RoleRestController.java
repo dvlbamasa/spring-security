@@ -43,7 +43,7 @@ public class RoleRestController {
 		return new ResponseEntity<Role>(role, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<Void> addRole(@RequestBody Role role, UriComponentsBuilder ucBuilder) {
 		roleService.addRole(role);
 
@@ -52,7 +52,7 @@ public class RoleRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Role> updateRole(@PathVariable("id") long id, @RequestBody Role role) {
 		Role newRole = roleService.getRoleById(id);
 		if (newRole == null) {
